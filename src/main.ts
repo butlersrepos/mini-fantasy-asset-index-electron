@@ -2,10 +2,28 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import { fetchAssetData } from './services/assetService';
 
+// For development hot reload
+const isDev = process.env.NODE_ENV === 'development';
+console.log('Running in development mode:', isDev);
+
+if (isDev) {
+  // Note: This module should be conditionally required only in dev mode
+  try {
+    require('electron-reload')(__dirname, {
+      electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
+      hardResetMethod: 'exit'
+    });
+    console.log('Electron reload enabled');
+  } catch (err) {
+    console.error('Failed to initialize electron-reload:', err);
+  }
+}
+
 // Keep a global reference of the window object to prevent garbage collection
 let mainWindow: BrowserWindow | null = null;
 
 function createWindow() {
+    console.log('Creating window...');
     // Create the browser window
     mainWindow = new BrowserWindow({
         width: 1200,
@@ -17,12 +35,21 @@ function createWindow() {
         }
     });
 
-    // Load index.html file
-    mainWindow.loadFile(path.join(__dirname, '../index.html'));
-
-    // Open DevTools in development mode
-    if (process.env.NODE_ENV === 'development') {
+    // Handle different loading methods for dev vs production
+    if (isDev) {
+        // Load from Vite dev server for development
+        const devUrl = 'http://localhost:3000';
+        console.log('Loading from dev server:', devUrl);
+        mainWindow.loadURL(devUrl)
+          .then(() => console.log('Window loaded from dev server successfully'))
+          .catch(err => console.error('Failed to load from dev server:', err));
+        
         mainWindow.webContents.openDevTools();
+    } else {
+        // Load index.html file from React build for production
+        const indexPath = path.join(__dirname, 'renderer', 'index.html');
+        console.log('Loading HTML from:', indexPath);
+        mainWindow.loadFile(indexPath);
     }
 
     // Handle window close
