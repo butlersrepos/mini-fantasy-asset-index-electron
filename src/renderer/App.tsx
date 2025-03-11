@@ -82,13 +82,18 @@ const App: React.FC = () => {
     const packs = [...new Set(assets.map(asset => asset.assetPack))].sort();
 
     return (
-        <div className="asset-index">
-            <header>
-                <h1>Welcome To The Minifantasy Asset Index</h1>
-                <img
-                    src="/assets/builders.gif"
-                    alt="Minifantasy style gif of humans building a structure foundations with various tools and materials."
-                />
+        <div className="min-h-screen bg-app-dark text-app-light p-6">
+            <header className="mb-8">
+                <h1 className="text-3xl font-bold mb-6 text-center">
+                    Welcome To The Minifantasy Asset Index
+                </h1>
+                <div className="flex justify-center mb-6">
+                    <img
+                        src="/assets/builders.gif"
+                        alt="Minifantasy style gif of humans building"
+                        className="rounded-lg shadow-lg max-w-sm"
+                    />
+                </div>
                 <Filters
                     searchTerm={searchTerm}
                     onSearchChange={setSearchTerm}
@@ -102,8 +107,16 @@ const App: React.FC = () => {
             </header>
 
             <main>
-                {loading && <div className="loading-indicator">Loading assets...</div>}
-                {error && <div className="error-message">Error: {error}</div>}
+                {loading && (
+                    <div className="flex justify-center items-center py-12">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                    </div>
+                )}
+                {error && (
+                    <div className="bg-red-900/30 border border-red-500 text-red-200 px-4 py-3 rounded mb-4">
+                        <p>Error: {error}</p>
+                    </div>
+                )}
                 {!loading && !error && (
                     <AssetTable assets={filteredAssets} />
                 )}

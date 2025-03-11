@@ -39,50 +39,59 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   return (
-    <div className="filters">
-      <div className="filter-container" style={{ flex: 1 }}>
-        <label className="filter-label" htmlFor="search-input">Search</label>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="col-span-1">
+        <label className="block text-sm font-medium mb-2" htmlFor="search-input">
+          Search
+        </label>
         <input
           id="search-input"
           type="text" 
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Search assets..."
+          className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
       
-      <div className="filter-container">
-        <label className="filter-label" htmlFor="type-filter">Asset Types</label>
+      <div className="col-span-1">
+        <label className="block text-sm font-medium mb-2" htmlFor="type-filter">
+          Asset Types
+        </label>
         <select
           id="type-filter"
           multiple
           value={selectedTypes}
           onChange={handleTypeChange}
           size={5}
+          className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Types</option>
           {types.map(type => (
             <option key={type} value={type.toLowerCase()}>{type}</option>
           ))}
         </select>
-        <span className="helper-text">Hold Ctrl/Cmd for multiple</span>
+        <p className="mt-1 text-xs text-gray-400">Hold Ctrl/Cmd for multiple</p>
       </div>
       
-      <div className="filter-container">
-        <label className="filter-label" htmlFor="pack-filter">Asset Packs</label>
+      <div className="col-span-1">
+        <label className="block text-sm font-medium mb-2" htmlFor="pack-filter">
+          Asset Packs
+        </label>
         <select
           id="pack-filter"
           multiple
           value={selectedPacks}
           onChange={handlePackChange}
           size={5}
+          className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Asset Packs</option>
           {packs.map(pack => (
             <option key={pack} value={pack.toLowerCase()}>{pack}</option>
           ))}
         </select>
-        <span className="helper-text">Hold Ctrl/Cmd for multiple</span>
+        <p className="mt-1 text-xs text-gray-400">Hold Ctrl/Cmd for multiple</p>
       </div>
     </div>
   );
