@@ -5,12 +5,6 @@ interface Asset {
     link: string;
 }
 
-interface Window {
-    electronAPI: {
-        fetchAssetData: () => Promise<Asset[] | { error: string }>;
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const typeFilter = document.getElementById('type-filter') as HTMLSelectElement;

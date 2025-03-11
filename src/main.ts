@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import * as path from 'path';
-import { fetchAssetData, initCache } from './services/assetService';
+import { fetchAssetData, initCache, getCacheInfo, deleteCacheAndRefetch } from './services/assetService';
 
 // For development hot reload
 const isDev = process.env.NODE_ENV === 'development';
@@ -95,6 +95,26 @@ ipcMain.handle('fetch-asset-data', async () => {
         return result;
     } catch (error) {
         console.error('Failed to fetch asset data:', error);
+        return { error: error instanceof Error ? error.message : String(error) };
+    }
+});
+
+// Handle getting cache info
+ipcMain.handle('get-cache-info', () => {
+    console.log('Received get-cache-info request');
+    return getCacheInfo();
+});
+
+// Handle cache deletion and refetch
+ipcMain.handle('delete-cache-and-refetch', async () => {
+    console.log('Received delete-cache-and-refetch request');
+    
+    try {
+        const result = await deleteCacheAndRefetch();
+        console.log('Cache deleted and data refetched successfully');
+        return result;
+    } catch (error) {
+        console.error('Failed to delete cache and refetch:', error);
         return { error: error instanceof Error ? error.message : String(error) };
     }
 });

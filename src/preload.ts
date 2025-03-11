@@ -5,6 +5,8 @@ import { contextBridge, ipcRenderer } from 'electron';
 contextBridge.exposeInMainWorld(
     'electronAPI',
     {
-        fetchAssetData: () => ipcRenderer.invoke('fetch-asset-data')
+        fetchAssetData: () => ipcRenderer.invoke('fetch-asset-data'),
+        getCacheInfo: () => ipcRenderer.invoke('get-cache-info'),
+        deleteCacheAndRefetch: () => ipcRenderer.invoke('delete-cache-and-refetch')
     }
 );
