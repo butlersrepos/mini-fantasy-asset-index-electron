@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pixel Art Asset Index</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .filters input, .filters select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    #loading-indicator {
+      text-align: center;
+      padding: 20px;
+    }
+    #error-message {
+      color: red;
+      padding: 10px;
+      border: 1px solid red;
+      background-color: #ffeeee;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pixel Art Asset Index</h1>
+    <div class="filters">
+      <input type="text" id="search-input" placeholder="Search assets...">
+      <select id="type-filter">
+        <option value="">All Types</option>
+        <option value="creature">Creature</option>
+        <option value="tile">Tile</option>
+        <option value="prop">Prop</option>
+        <!-- Add more options based on your data -->
+      </select>
+      <select id="pack-filter">
+        <option value="">All Asset Packs</option>
+        <!-- Will be populated dynamically -->
+      </select>
+    </div>
+  </header>
+  
+  <main>
+    <table id="asset-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Asset Pack</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="asset-table-body">
+        <!-- Assets will be listed here -->
+      </tbody>
+    </table>
+    
+    <div id="loading-indicator" class="hidden">Loading assets...</div>
+    <div id="error-message" class="hidden"></div>
+  </main>
+
+  <script src="./dist/renderer.js"></script>
+</body>
+</html>

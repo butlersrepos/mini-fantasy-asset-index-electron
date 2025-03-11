@@ -1,0 +1,34 @@
+{
+  "name": "asset-index-electron",
+  "version": "1.0.0",
+  "description": "A searchable index for pixel art assets",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "npm run build && electron .",
+    "build": "tsc && npm run copy-static",
+    "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy-static": "copyfiles \"src/**/*.{html,css,json}\" \"index.html\" \"styles/**/*\" dist/"
+  },
+  "keywords": [
+    "electron",
+    "pixel-art",
+    "asset-index",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.16.16",
+    "@types/node-fetch": "^2.6.12",
+    "electron": "^25.0.0",
+    "electron-reload": "^2.0.0-alpha.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "copyfiles": "^2.4.1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "electron-fetch": "^1.9.1"
+  }
+}
