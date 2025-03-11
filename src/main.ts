@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import * as path from 'path';
 import { fetchAssetData, initCache } from './services/assetService';
 
@@ -7,16 +7,16 @@ const isDev = process.env.NODE_ENV === 'development';
 console.log('Running in development mode:', isDev);
 
 if (isDev) {
-  // Note: This module should be conditionally required only in dev mode
-  try {
-    require('electron-reload')(__dirname, {
-      electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
-      hardResetMethod: 'exit'
-    });
-    console.log('Electron reload enabled');
-  } catch (err) {
-    console.error('Failed to initialize electron-reload:', err);
-  }
+    // Note: This module should be conditionally required only in dev mode
+    try {
+        require('electron-reload')(__dirname, {
+            electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
+            hardResetMethod: 'exit'
+        });
+        console.log('Electron reload enabled');
+    } catch (err) {
+        console.error('Failed to initialize electron-reload:', err);
+    }
 }
 
 // Keep a global reference of the window object to prevent garbage collection
@@ -35,15 +35,21 @@ function createWindow() {
         }
     });
 
+    // Allow links to open in user's system browser
+    mainWindow.webContents.setWindowOpenHandler((details) => {
+        shell.openExternal(details.url); // Open URL in user's browser.
+        return { action: "deny" }; // Prevent the app from opening the URL.
+    })
+
     // Handle different loading methods for dev vs production
     if (isDev) {
         // Load from Vite dev server for development
         const devUrl = 'http://localhost:3000';
         console.log('Loading from dev server:', devUrl);
         mainWindow.loadURL(devUrl)
-          .then(() => console.log('Window loaded from dev server successfully'))
-          .catch(err => console.error('Failed to load from dev server:', err));
-        
+            .then(() => console.log('Window loaded from dev server successfully'))
+            .catch(err => console.error('Failed to load from dev server:', err));
+
         mainWindow.webContents.openDevTools();
     } else {
         // Load index.html file from React build for production
@@ -62,7 +68,7 @@ function createWindow() {
 app.whenReady().then(() => {
     // Initialize cache
     initCache();
-    
+
     createWindow();
 
     app.on('activate', () => {
@@ -82,7 +88,7 @@ app.on('window-all-closed', () => {
 // Handle fetching asset data
 ipcMain.handle('fetch-asset-data', async () => {
     console.log('Received fetch-asset-data request');
-    
+
     try {
         const result = await fetchAssetData();
         console.log('Fetch successful');
