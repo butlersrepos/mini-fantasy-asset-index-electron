@@ -46,6 +46,15 @@ export function initCache(): void {
     console.log('Cache directory initialized at:', cacheDir);
 }
 
+// Get the path to the cache directory
+export function getCachePath(): string {
+    if (!cacheDir) {
+        initCache();
+    }
+    
+    return cacheDir;
+}
+
 // Get cache information for the UI
 export function getCacheInfo(): CacheInfo {
     if (!cacheDir) {

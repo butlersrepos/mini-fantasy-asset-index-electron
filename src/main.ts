@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import * as path from 'path';
-import { fetchAssetData, initCache, getCacheInfo, deleteCacheAndRefetch } from './services/assetService';
+import { fetchAssetData, initCache, getCacheInfo, deleteCacheAndRefetch, getCachePath } from './services/assetService';
 
 // For development hot reload
 const isDev = process.env.NODE_ENV === 'development';
@@ -115,6 +115,21 @@ ipcMain.handle('delete-cache-and-refetch', async () => {
         return result;
     } catch (error) {
         console.error('Failed to delete cache and refetch:', error);
+        return { error: error instanceof Error ? error.message : String(error) };
+    }
+});
+
+// Handle opening cache directory
+ipcMain.handle('open-cache-directory', async () => {
+    console.log('Received open-cache-directory request');
+    const cachePath = getCachePath();
+    console.log('Opening cache directory:', cachePath);
+    
+    try {
+        await shell.openPath(cachePath);
+        return { success: true };
+    } catch (error) {
+        console.error('Failed to open cache directory:', error);
         return { error: error instanceof Error ? error.message : String(error) };
     }
 });

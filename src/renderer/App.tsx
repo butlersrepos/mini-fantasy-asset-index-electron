@@ -10,6 +10,7 @@ declare global {
             fetchAssetData: () => Promise<Asset[] | { error: string }>;
             getCacheInfo: () => Promise<{exists: boolean, timestamp: number | null, assetCount: number | null}>;
             deleteCacheAndRefetch: () => Promise<Asset[] | { error: string }>;
+            openCacheDirectory: () => Promise<{success: boolean} | {error: string}>;
         }
     }
 }
