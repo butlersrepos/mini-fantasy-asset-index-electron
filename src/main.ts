@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
-import { fetchAssetData } from './services/assetService';
+import { fetchAssetData, initCache } from './services/assetService';
 
 // For development hot reload
 const isDev = process.env.NODE_ENV === 'development';
@@ -60,6 +60,9 @@ function createWindow() {
 
 // Create window when Electron has finished initialization
 app.whenReady().then(() => {
+    // Initialize cache
+    initCache();
+    
     createWindow();
 
     app.on('activate', () => {
