@@ -49,6 +49,32 @@
       margin-bottom: 10px;
       border-radius: 4px;
     }
+    /* Multi-select styling */
+    .multi-select {
+      height: auto;
+      min-height: 100px;
+      width: 200px;
+    }
+    
+    .multi-select option {
+      padding: 5px;
+    }
+    
+    .filter-container {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .filter-label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    .helper-text {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
@@ -56,17 +82,24 @@
     <h1>Pixel Art Asset Index</h1>
     <div class="filters">
       <input type="text" id="search-input" placeholder="Search assets...">
-      <select id="type-filter">
-        <option value="">All Types</option>
-        <option value="creature">Creature</option>
-        <option value="tile">Tile</option>
-        <option value="prop">Prop</option>
-        <!-- Add more options based on your data -->
-      </select>
-      <select id="pack-filter">
-        <option value="">All Asset Packs</option>
-        <!-- Will be populated dynamically -->
-      </select>
+      
+      <div class="filter-container">
+        <label class="filter-label" for="type-filter">Asset Types</label>
+        <select id="type-filter" multiple class="multi-select">
+          <option value="">All Types</option>
+          <!-- Will be populated dynamically -->
+        </select>
+        <span class="helper-text">Hold Ctrl/Cmd for multiple</span>
+      </div>
+      
+      <div class="filter-container">
+        <label class="filter-label" for="pack-filter">Asset Packs</label>
+        <select id="pack-filter" multiple class="multi-select">
+          <option value="">All Asset Packs</option>
+          <!-- Will be populated dynamically -->
+        </select>
+        <span class="helper-text">Hold Ctrl/Cmd for multiple</span>
+      </div>
     </div>
   </header>
   

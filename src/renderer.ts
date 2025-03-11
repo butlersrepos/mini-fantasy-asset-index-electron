@@ -84,11 +84,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // Helper function to get selected values from multi-select
+    function getSelectedValues(select: HTMLSelectElement): string[] {
+        return Array.from(select.selectedOptions).map(option => option.value.toLowerCase());
+    }
+    
     // Function to filter assets based on search and filters
     function filterAssets() {
         const searchTerm = searchInput.value.toLowerCase();
-        const selectedType = typeFilter.value.toLowerCase();
-        const selectedPack = packFilter.value.toLowerCase();
+        const selectedTypes = getSelectedValues(typeFilter);
+        const selectedPacks = getSelectedValues(packFilter);
+        
+        // If "All Types" or nothing is selected, include all types
+        const includeAllTypes = selectedTypes.length === 0 || selectedTypes.includes('');
+        
+        // If "All Asset Packs" or nothing is selected, include all packs
+        const includeAllPacks = selectedPacks.length === 0 || selectedPacks.includes('');
         
         const filteredAssets = assets.filter(asset => {
             // Check if asset matches search term
@@ -97,13 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 asset.type.toLowerCase().includes(searchTerm) ||
                 asset.assetPack.toLowerCase().includes(searchTerm);
             
-            // Check if asset matches selected type
-            const matchesType = selectedType === '' || 
-                asset.type.toLowerCase() === selectedType;
+            // Check if asset matches any of the selected types (or all if none selected)
+            const matchesType = includeAllTypes || 
+                selectedTypes.includes(asset.type.toLowerCase());
             
-            // Check if asset matches selected pack
-            const matchesPack = selectedPack === '' || 
-                asset.assetPack.toLowerCase() === selectedPack;
+            // Check if asset matches any of the selected packs (or all if none selected)
+            const matchesPack = includeAllPacks || 
+                selectedPacks.includes(asset.assetPack.toLowerCase());
             
             return matchesSearch && matchesType && matchesPack;
         });
