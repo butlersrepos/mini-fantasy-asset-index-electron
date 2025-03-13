@@ -24,6 +24,10 @@ const App: React.FC = () => {
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(20);
 
     // Load assets when component mounts
     useEffect(() => {
@@ -81,6 +85,11 @@ const App: React.FC = () => {
 
         filterAssets();
     }, [assets, searchTerm, selectedTypes, selectedPacks]);
+
+    // Reset to first page when filters or items per page changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, selectedTypes, selectedPacks, itemsPerPage]);
 
     // Get unique values for dropdowns
     const types = [...new Set(assets.map(asset => asset.type))].sort();
@@ -145,7 +154,13 @@ const App: React.FC = () => {
                     </div>
                 )}
                 {!loading && !error && (
-                    <AssetTable assets={filteredAssets} />
+                    <AssetTable 
+                        assets={filteredAssets} 
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        itemsPerPage={itemsPerPage}
+                        setItemsPerPage={setItemsPerPage}
+                    />
                 )}
             </main>
 
