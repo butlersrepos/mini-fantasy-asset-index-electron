@@ -38,12 +38,21 @@ export function initCache(): void {
     cacheDir = path.join(userDataPath, 'cache');
     cacheFilePath = path.join(cacheDir, 'asset-data.json');
 
+    console.log('Cache directory initialized at:', cacheDir);
+    console.log('Cache file path:', cacheFilePath);
+
     // Create cache directory if it doesn't exist
     if (!fs.existsSync(cacheDir)) {
         fs.mkdirSync(cacheDir, { recursive: true });
+        console.log('Created cache directory');
     }
 
-    console.log('Cache directory initialized at:', cacheDir);
+    // Check if cache file exists
+    if (fs.existsSync(cacheFilePath)) {
+        console.log('Cache file exists');
+    } else {
+        console.log('Cache file does not exist');
+    }
 }
 
 // Get the path to the cache directory
@@ -51,7 +60,7 @@ export function getCachePath(): string {
     if (!cacheDir) {
         initCache();
     }
-    
+
     return cacheDir;
 }
 
@@ -101,6 +110,8 @@ export async function deleteCacheAndRefetch(): Promise<Asset[]> {
 
 // Single consolidated fetch method
 export async function fetchAssetData(forceRefresh = false): Promise<Asset[]> {
+    const isDev = process.env.NODE_ENV === 'development';
+
     // Initialize cache if not already done
     if (!cacheDir) {
         initCache();
@@ -112,11 +123,19 @@ export async function fetchAssetData(forceRefresh = false): Promise<Asset[]> {
         try {
             const cacheContent = fs.readFileSync(cacheFilePath, 'utf8');
             cachedData = JSON.parse(cacheContent);
-            cachedData != null && console.log('Found cached data from:', new Date(cachedData.timestamp).toLocaleString());
+            if (cachedData) {
+                console.log(`Found cached data from: ${new Date(cachedData.timestamp).toLocaleString()}`);
+                console.log(`Cache contains ${cachedData.assets.length} assets`);
+            }
         } catch (err) {
             console.error('Error reading cache file:', err);
         }
+    } else {
+        console.log(`Cache is being bypassed. forceRefresh=${forceRefresh}, exists=${fs.existsSync(cacheFilePath)}`);
     }
+
+    // In dev mode with cache, extend expiry time to prevent unnecessary fetches during development
+    const effectiveCacheExpiry = isDev ? CACHE_EXPIRY * 7 : CACHE_EXPIRY; // 7 days in dev mode
 
     // Primary URL
     const primaryUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtDDaI5kVRkOUWqJb8GRksylMr-wsKKbKB6O4XQ1rhVs5weqq_7NZPltfsniDND5C17kFatv2mUtyp/pub?gid=0&single=true&output=tsv";
@@ -154,7 +173,7 @@ export async function fetchAssetData(forceRefresh = false): Promise<Asset[]> {
         }
 
         // Check if cache is still fresh and we don't have a definitive 304
-        if (cachedData && (Date.now() - cachedData.timestamp) < CACHE_EXPIRY) {
+        if (cachedData && (Date.now() - cachedData.timestamp) < effectiveCacheExpiry) {
             // Google Docs doesn't reliably return 304, so we'll use time-based expiry as well
             console.log('Cache is still fresh, using cached data');
             return cachedData.assets;
@@ -193,7 +212,7 @@ export async function fetchAssetData(forceRefresh = false): Promise<Asset[]> {
 
         try {
             fs.writeFileSync(cacheFilePath, JSON.stringify(newCacheData));
-            console.log('Data saved to cache');
+            console.log(`Data saved to cache: ${cacheFilePath}`);
         } catch (err) {
             console.error('Error writing to cache:', err);
         }

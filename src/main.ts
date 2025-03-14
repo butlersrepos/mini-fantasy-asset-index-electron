@@ -5,6 +5,7 @@ import { fetchAssetData, initCache, getCacheInfo, deleteCacheAndRefetch, getCach
 // For development hot reload
 const isDev = process.env.NODE_ENV === 'development';
 console.log('Running in development mode:', isDev);
+console.log('User data path:', app.getPath('userData'));
 
 if (isDev) {
     // Note: This module should be conditionally required only in dev mode
