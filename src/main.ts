@@ -5,6 +5,7 @@ import { fetchAssetData, initCache, getCacheInfo, deleteCacheAndRefetch, getCach
 // For development hot reload
 const isDev = process.env.NODE_ENV === 'development';
 console.log('Running in development mode:', isDev);
+console.log('Application is packaged:', app.isPackaged);
 console.log('User data path:', app.getPath('userData'));
 
 if (isDev) {
@@ -67,9 +68,10 @@ function createWindow() {
 
 // Create window when Electron has finished initialization
 app.whenReady().then(() => {
-    // Initialize cache
+    // Initialize cache once at startup
+    console.log('App is ready, initializing cache');
     initCache();
-
+    
     createWindow();
 
     app.on('activate', () => {
@@ -89,9 +91,10 @@ app.on('window-all-closed', () => {
 // Handle fetching asset data
 ipcMain.handle('fetch-asset-data', async () => {
     console.log('Received fetch-asset-data request');
-
+    
     try {
-        const result = await fetchAssetData();
+        // Important: Do NOT force refresh here
+        const result = await fetchAssetData(false);
         console.log('Fetch successful');
         return result;
     } catch (error) {

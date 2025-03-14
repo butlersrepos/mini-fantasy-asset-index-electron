@@ -31,8 +31,17 @@ const CACHE_EXPIRY = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 let cacheDir: string;
 let cacheFilePath: string;
 
+// Keep track if we've already initialized
+let isInitialized = false;
+
 // Initialize cache directory
 export function initCache(): void {
+    // Prevent multiple initializations
+    if (isInitialized) {
+        console.log('Cache already initialized, skipping');
+        return;
+    }
+
     // Get user data directory from electron app
     const userDataPath = app.getPath('userData');
     cacheDir = path.join(userDataPath, 'cache');
@@ -50,9 +59,19 @@ export function initCache(): void {
     // Check if cache file exists
     if (fs.existsSync(cacheFilePath)) {
         console.log('Cache file exists');
+        try {
+            // Verify cache is valid JSON
+            const content = fs.readFileSync(cacheFilePath, 'utf8');
+            const parsed = JSON.parse(content);
+            console.log(`Cache contains ${parsed.assets?.length || 0} assets from ${new Date(parsed.timestamp).toLocaleString()}`);
+        } catch (err) {
+            console.error('Cache file exists but is corrupted:', err);
+        }
     } else {
         console.log('Cache file does not exist');
     }
+
+    isInitialized = true;
 }
 
 // Get the path to the cache directory
@@ -111,14 +130,22 @@ export async function deleteCacheAndRefetch(): Promise<Asset[]> {
 // Single consolidated fetch method
 export async function fetchAssetData(forceRefresh = false): Promise<Asset[]> {
     const isDev = process.env.NODE_ENV === 'development';
+    const isPackaged = app.isPackaged;
+
+    console.log(`fetchAssetData called - forceRefresh: ${forceRefresh}, isDev: ${isDev}, isPackaged: ${isPackaged}`);
 
     // Initialize cache if not already done
-    if (!cacheDir) {
+    if (!isInitialized) {
         initCache();
     }
 
     // Check if we have cached data
     let cachedData: CachedData | null = null;
+    try {
+        console.log(`cacheFilePath: ${cacheFilePath}, exists: ${fs.existsSync(cacheFilePath)}, dirstats: ${fs.accessSync(cacheDir)}`);
+    } catch (e: unknown) {
+        console.log(`error: ${e && typeof e == 'object' && 'message' in e ? e.message : e}`);
+    }
     if (!forceRefresh && fs.existsSync(cacheFilePath)) {
         try {
             const cacheContent = fs.readFileSync(cacheFilePath, 'utf8');
@@ -126,12 +153,18 @@ export async function fetchAssetData(forceRefresh = false): Promise<Asset[]> {
             if (cachedData) {
                 console.log(`Found cached data from: ${new Date(cachedData.timestamp).toLocaleString()}`);
                 console.log(`Cache contains ${cachedData.assets.length} assets`);
+
+                // Return cached data immediately unless explicitly forced to refresh
+                if (!forceRefresh) {
+                    console.log('Using cached data (skipping network check)');
+                    return cachedData.assets;
+                }
             }
         } catch (err) {
             console.error('Error reading cache file:', err);
         }
     } else {
-        console.log(`Cache is being bypassed. forceRefresh=${forceRefresh}, exists=${fs.existsSync(cacheFilePath)}`);
+        console.log(`Cache is being bypassed. forceRefresh=${forceRefresh}, exists=${fs.existsSync(cacheFilePath)}, cacheFilePath=${cacheFilePath}`);
     }
 
     // In dev mode with cache, extend expiry time to prevent unnecessary fetches during development

@@ -36,6 +36,7 @@ const App: React.FC = () => {
 
     const loadAssets = async () => {
         try {
+            console.log("App: Loading assets from cache or network");
             setLoading(true);
             const data = await window.electronAPI.fetchAssetData();
 
@@ -45,6 +46,7 @@ const App: React.FC = () => {
                 return;
             }
 
+            console.log(`App: Received ${data.length} assets`);
             setAssets(data);
             setFilteredAssets(data);
             setLoading(false);
