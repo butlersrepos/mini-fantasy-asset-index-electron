@@ -1,0 +1,118 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="200" height="200">
+<g style="fill:black;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:0;fill-rule:nonzero;">
+<g style="fill:#111827;">
+  <rect x="0" y="0" width="200" height="200" rx="10" ry="10"/>
+</g>
+<g style="opacity 0.7 ">
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L30,10"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L50,5"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L80,5"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L120,5"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L150,5"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L170,10"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L190,40"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L195,80"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L195,120"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L190,160"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L170,190"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L130,195"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L70,195"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L30,190"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L10,160"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L5,120"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L5,80"/>
+</g>
+<g style="stroke:#f59e0b;stroke-width:4;">
+  <path d="M100,100 L10,40"/>
+</g>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.996195 -0.0871557 0.0871557 0.996195 -2.70797 7.9772)">
+  <path d="M80,40 L65,25 L85,20 L100,35 Z"/>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.996195 0.0871557 -0.0871557 0.996195 3.46903 -9.45395)">
+  <path d="M100,35 L115,20 L135,25 L120,40 Z"/>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.906308 0.422618 -0.422618 0.906308 40.8163 -64.1105)">
+  <path d="M160,60 L175,45 L170,65 L155,80 Z"/>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.984808 -0.173648 0.173648 0.984808 -14.8581 30.1712)">
+  <path d="M155,100 L175,85 L170,115 L155,120 Z"/>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.996195 0.0871557 -0.0871557 0.996195 14.7232 -7.21614)">
+  <path d="M80,160 L65,175 L85,180 L100,165 Z"/>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.996195 -0.0871557 0.0871557 0.996195 -13.9621 10.215)">
+  <path d="M100,165 L115,180 L135,175 L120,160 Z"/>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.906308 -0.422618 0.422618 0.906308 -22.0779 20.4132)">
+  <path d="M40,60 L25,45 L30,65 L45,80 Z"/>
+</g>
+<g style="fill:#64748b;stroke:#334155;stroke-width:2;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <path d="M45,100 L25,85 L30,115 L45,120 Z"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:#ef4444;stroke:#7f1d1d;stroke-width:1;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="0" cy="0" r="0"/>
+</g>
+<g style="fill:centerGlow;" transform="matrix(0.984808 0.173648 -0.173648 0.984808 17.8965 -4.55846)">
+  <circle cx="100" cy="100" r="20"/>
+</g>
+<defs>
+<100Gradient id="radial" x1="0" y1="100" x2="100" y2="100">
+</svg>
