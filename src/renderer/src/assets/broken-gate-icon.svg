@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#111827" rx="10" ry="10" />
+  
+  <!-- Light Rays -->
+  <g opacity="0.7">
+    <path d="M100,100 L30,10" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L50,5" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L80,5" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L120,5" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L150,5" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L170,10" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L190,40" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L195,80" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L195,120" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L190,160" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L170,190" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L130,195" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L70,195" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L30,190" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L10,160" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L5,120" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L5,80" stroke="#f59e0b" stroke-width="4" />
+    <path d="M100,100 L10,40" stroke="#f59e0b" stroke-width="4" />
+  </g>
+  
+  <!-- Circular Stone Ring Fragments -->
+  <!-- Top quadrant fragments -->
+  <path d="M80,40 L65,25 L85,20 L100,35 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(-5 90 35)" />
+  <path d="M100,35 L115,20 L135,25 L120,40 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(5 110 35)" />
+  
+  <!-- Right quadrant fragments -->
+  <path d="M160,60 L175,45 L170,65 L155,80 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(25 165 60)" />
+  <path d="M155,100 L175,85 L170,115 L155,120 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(-10 165 100)" />
+  
+  <!-- Bottom quadrant fragments -->
+  <path d="M80,160 L65,175 L85,180 L100,165 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(5 90 165)" />
+  <path d="M100,165 L115,180 L135,175 L120,160 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(-5 110 165)" />
+  
+  <!-- Left quadrant fragments -->
+  <path d="M40,60 L25,45 L30,65 L45,80 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(-25 35 60)" />
+  <path d="M45,100 L25,85 L30,115 L45,120 Z" fill="#64748b" stroke="#334155" stroke-width="2" transform="rotate(10 35 100)" />
+  
+  <!-- Red Gems Along the Ring -->
+  <circle cx="100" cy="30" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="140" cy="50" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2.7s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="160" cy="100" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="3.2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="140" cy="150" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.8s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="100" cy="170" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="3.3s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="60" cy="150" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="2.9s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="40" cy="100" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3.1s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="60" cy="50" r="4" fill="#ef4444" stroke="#7f1d1d" stroke-width="1">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Center Glow -->
+  <circle cx="100" cy="100" r="20" fill="url(#centerGlow)" />
+  
+  <!-- Definitions for gradients -->
+  <defs>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#f59e0b;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+</svg>
