@@ -4,7 +4,7 @@ import AssetTable from './components/AssetTable.jsx';
 import Settings from './components/Settings.jsx';
 
 import buildersGif from './assets/builders.gif';
-import { Asset } from 'src/types.js';
+import { Asset } from '../types.js';
 
 declare global {
     interface Window {
