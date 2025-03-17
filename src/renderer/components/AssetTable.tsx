@@ -1,5 +1,5 @@
 import React from 'react';
-import { Asset } from '../../services/assetService';
+import type { Asset } from '../../types';
 import Pagination from './Pagination';
 
 interface AssetTableProps {
@@ -87,7 +87,7 @@ const AssetTable: React.FC<AssetTableProps> = ({
                                                 rel="noopener noreferrer"
                                                 className="text-blue-400 hover:text-blue-300 underline"
                                             >
-                                                View
+                                                Open
                                             </a>
                                         ) : (
                                             <span className="text-gray-500">N/A</span>

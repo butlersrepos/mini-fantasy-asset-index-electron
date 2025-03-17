@@ -140,7 +140,7 @@ const App: React.FC = () => {
 
             <header className="mb-8">
                 <h1 className="text-3xl font-bold mb-6 text-center">
-                    Welcome To The Minifantasy Asset Index
+                    Welcome To The MiniFantasy Asset Index
                 </h1>
                 <div className="flex justify-center mb-6">
                     <img
