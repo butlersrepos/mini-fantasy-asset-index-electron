@@ -24,13 +24,15 @@ jobs:
       - name: Build macOS app
         run: npm run build:mac
         
+      - name: List dist directory
+        run: ls -la dist
+        
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v3
         with:
           name: mac-artifacts
-          path: |
-            dist/*.dmg
-            dist/*.zip
+          path: dist
+          if-no-files-found: warn
   
   build-windows:
     runs-on: windows-latest
@@ -50,14 +52,15 @@ jobs:
       - name: Build Windows app
         run: npm run build:win
         
+      - name: List dist directory
+        run: dir dist
+        
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v3
         with:
           name: win-artifacts
-          path: |
-            dist/*.exe
-            dist/*.msi
-            dist/*.zip
+          path: dist
+          if-no-files-found: warn
   
   create-release:
     needs: [build-mac, build-windows]
@@ -69,12 +72,15 @@ jobs:
         with:
           path: artifacts
       
+      - name: List downloaded artifacts
+        run: |
+          find artifacts -type f | sort
+      
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/mac-artifacts/**
-            artifacts/win-artifacts/**
+            artifacts/**/*
           draft: false
           prerelease: false
         env:
