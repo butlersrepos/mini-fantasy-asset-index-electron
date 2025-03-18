@@ -276,6 +276,10 @@ function parseTsvToAssets(tsvData: string): Asset[] {
     const nameIndex = headers.findIndex((h) => h.toLowerCase().includes('name'))
     const typeIndex = headers.findIndex((h) => h.toLowerCase().includes('type'))
     const packIndex = headers.findIndex((h) => h.toLowerCase().includes('pack'))
+    const patreonPackIndex = headers.findIndex((h) => h.toLowerCase().includes('patreon pack'))
+    const itchIndex = headers.findIndex((h) => h.toLowerCase().includes('itch'))
+    const unityIndex = headers.findIndex((h) => h.toLowerCase().includes('unity'))
+    const pateronIndex = headers.findIndex((h) => h.toLowerCase().includes('patreon'))
     const linkIndex = headers.findIndex(
         (h) => h.toLowerCase().includes('link') || h.toLowerCase().includes('url')
     )
@@ -301,14 +305,21 @@ function parseTsvToAssets(tsvData: string): Asset[] {
     const assets = lines
         .slice(1)
         .filter((line) => line.trim() !== '')
-        .map((line) => {
+        .map((line, _idx) => {
             const values = line.split('\t')
+            if (_idx < 2) {
+                console.log({ values })
+            }
             return {
                 name: nameIndex >= 0 ? values[nameIndex] || 'Unknown' : 'Unknown',
                 type: typeIndex >= 0 ? values[typeIndex] || 'Unknown' : 'Unknown',
-                assetPack: packIndex >= 0 ? values[packIndex] || 'Unknown' : 'Unknown',
+                assetPack: packIndex >= 0 ? values[packIndex] || '' : '',
+                patreonPack: patreonPackIndex >= 0 ? values[patreonPackIndex] || '' : '',
+                itch: itchIndex >= 0 ? values[itchIndex] == 'yes' : false,
+                unity: unityIndex >= 0 ? values[unityIndex] == 'yes' : false,
+                patreon: pateronIndex >= 0 ? values[pateronIndex] == 'yes' : false,
                 link: linkIndex >= 0 ? values[linkIndex] || '#' : '#',
-                tags: tagsIndex >= 0 
+                tags: tagsIndex >= 0
                     ? (values[tagsIndex] || '')
                         .split(',')
                         .map(tag => tag.trim())
