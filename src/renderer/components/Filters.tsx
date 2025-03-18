@@ -9,6 +9,9 @@ interface FiltersProps {
   packs: string[];
   selectedPacks: string[];
   onPackChange: (packs: string[]) => void;
+  stores: string[];
+  selectedStores: string[];
+  onStoreChange: (stores: string[]) => void;
 }
 
 const Filters: React.FC<FiltersProps> = ({
@@ -19,7 +22,10 @@ const Filters: React.FC<FiltersProps> = ({
   onTypeChange,
   packs,
   selectedPacks,
-  onPackChange
+  onPackChange,
+  stores,
+  selectedStores,
+  onStoreChange
 }) => {
   // Handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +47,12 @@ const Filters: React.FC<FiltersProps> = ({
   const handlePackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = Array.from(e.target.selectedOptions).map(option => option.value.toLowerCase());
     onPackChange(selected);
+  };
+
+  // Handle store filter change
+  const handleStoreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = Array.from(e.target.selectedOptions).map(option => option.value.toLowerCase());
+    onStoreChange(selected);
   };
 
   return (
@@ -72,6 +84,26 @@ const Filters: React.FC<FiltersProps> = ({
             </button>
           )}
         </span>
+      </div>
+
+      <div className="col-span-1">
+        <label className="block text-sm font-medium mb-2" htmlFor="type-filter">
+          Stores
+        </label>
+        <select
+          id="type-filter"
+          multiple
+          value={selectedStores}
+          onChange={handleStoreChange}
+          size={5}
+          className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Stores</option>
+          {stores.map(store => (
+            <option key={store} value={store.toLowerCase()}>{store}</option>
+          ))}
+        </select>
+        <p className="mt-1 text-xs text-gray-400">Hold Ctrl/Cmd for multiple</p>
       </div>
 
       <div className="col-span-1">

@@ -25,6 +25,7 @@ const App: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     const [selectedPacks, setSelectedPacks] = useState<string[]>([]);
+    const [selectedStores, setSelectedStores] = useState<string[]>([]);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     // Pagination state
@@ -80,6 +81,7 @@ const App: React.FC = () => {
             const searchLower = searchTerm.toLowerCase();
             const includeAllTypes = selectedTypes.length === 0 || selectedTypes.includes('');
             const includeAllPacks = selectedPacks.length === 0 || selectedPacks.includes('');
+            const includeAllStores = selectedStores.length === 0 || selectedStores.includes('');
 
             const filtered = assets.filter(asset => {
                 // Check if asset matches search term
@@ -98,14 +100,18 @@ const App: React.FC = () => {
                 const matchesPack = includeAllPacks ||
                     selectedPacks.includes(asset.assetPack.toLowerCase());
 
-                return matchesSearch && matchesType && matchesPack;
+                // Check if asset matches any of the selected stores (or all if none selected)
+                const matchesStore = includeAllStores ||
+                    selectedStores.some(store => asset[store.toLowerCase()] || (store.toLowerCase() === 'patreon' && asset.patreonPack !== ""));
+
+                return matchesSearch && matchesType && matchesPack && matchesStore;
             });
 
             setFilteredAssets(filtered);
         };
 
         filterAssets();
-    }, [assets, searchTerm, selectedTypes, selectedPacks]);
+    }, [assets, searchTerm, selectedTypes, selectedPacks, selectedStores]);
 
     // Reset to first page when filters or items per page changes
     useEffect(() => {
@@ -114,7 +120,8 @@ const App: React.FC = () => {
 
     // Get unique values for dropdowns
     const types = [...new Set(assets.map(asset => asset.type))].sort();
-    const packs = [...new Set(assets.map(asset => asset.assetPack))].sort();
+    const packs = [...new Set(assets.map(asset => asset.assetPack).filter(pack => pack != ""))].sort();
+    const stores = ['Itch', 'Unity', 'Patreon'].sort();
 
     const handleSettingsClick = () => {
         setIsSettingsOpen(true);
@@ -154,12 +161,15 @@ const App: React.FC = () => {
                 <Filters
                     searchTerm={searchTerm}
                     onSearchChange={setSearchTerm}
+                    onTypeChange={setSelectedTypes}
+                    onPackChange={setSelectedPacks}
+                    onStoreChange={setSelectedStores}
                     types={types}
                     selectedTypes={selectedTypes}
-                    onTypeChange={setSelectedTypes}
                     packs={packs}
                     selectedPacks={selectedPacks}
-                    onPackChange={setSelectedPacks}
+                    stores={stores}
+                    selectedStores={selectedStores}
                 />
             </header>
 

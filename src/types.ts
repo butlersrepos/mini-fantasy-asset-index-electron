@@ -1,9 +1,13 @@
 export interface Asset {
     name: string
     type: string
-    assetPack: string
+    assetPack: string,
+    patreonPack: string,
     link: string
     tags: string[]  // Add the tags array property
+    itch: boolean,
+    unity: boolean,
+    patreon: boolean,
 }
 
 // Interface for cached data
