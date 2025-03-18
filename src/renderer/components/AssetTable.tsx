@@ -76,14 +76,14 @@ const AssetTable: React.FC<AssetTableProps> = ({
                         ) : (
                             currentItems.map((asset, index) => {
                                 // Format tags for tooltip
-                                const tagsTooltip = asset.tags?.length > 0 
+                                const tagsTooltip = asset.tags?.length > 0
                                     ? `Tags: ${asset.tags.join(', ')}`
                                     : 'No tags';
-                                
+
                                 return (
-                                    <tr 
-                                        key={index} 
-                                        className="hover:bg-gray-500"
+                                    <tr
+                                        key={index}
+                                        className={`hover:bg-gray-500${index % 2 === 0 ? '' : ' bg-gray-800'}`}
                                         title={tagsTooltip}
                                         style={{ cursor: 'help' }}
                                     >
