@@ -3,6 +3,7 @@ export interface Asset {
     type: string
     assetPack: string
     link: string
+    tags: string[]  // Add the tags array property
 }
 
 // Interface for cached data

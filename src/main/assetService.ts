@@ -279,6 +279,7 @@ function parseTsvToAssets(tsvData: string): Asset[] {
     const linkIndex = headers.findIndex(
         (h) => h.toLowerCase().includes('link') || h.toLowerCase().includes('url')
     )
+    const tagsIndex = headers.findIndex((h) => h.toLowerCase().includes('tags'))
 
     console.log(
         'Column indexes - Name:',
@@ -288,7 +289,9 @@ function parseTsvToAssets(tsvData: string): Asset[] {
         'Pack:',
         packIndex,
         'Link:',
-        linkIndex
+        linkIndex,
+        'Tags:',
+        tagsIndex
     )
 
     if (nameIndex === -1 || typeIndex === -1 || packIndex === -1 || linkIndex === -1) {
@@ -304,7 +307,13 @@ function parseTsvToAssets(tsvData: string): Asset[] {
                 name: nameIndex >= 0 ? values[nameIndex] || 'Unknown' : 'Unknown',
                 type: typeIndex >= 0 ? values[typeIndex] || 'Unknown' : 'Unknown',
                 assetPack: packIndex >= 0 ? values[packIndex] || 'Unknown' : 'Unknown',
-                link: linkIndex >= 0 ? values[linkIndex] || '#' : '#'
+                link: linkIndex >= 0 ? values[linkIndex] || '#' : '#',
+                tags: tagsIndex >= 0 
+                    ? (values[tagsIndex] || '')
+                        .split(',')
+                        .map(tag => tag.trim())
+                        .filter(tag => tag !== '')
+                    : []
             }
         })
 

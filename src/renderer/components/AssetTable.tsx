@@ -74,27 +74,39 @@ const AssetTable: React.FC<AssetTableProps> = ({
                                 </td>
                             </tr>
                         ) : (
-                            currentItems.map((asset, index) => (
-                                <tr key={index} className="hover:bg-gray-500">
-                                    <td className={TableCellClasses}>{asset.name}</td>
-                                    <td className={TableCellClasses}>{asset.type}</td>
-                                    <td className={TableCellClasses}>{asset.assetPack}</td>
-                                    <td className={TableCellClasses}>
-                                        {asset.link && asset.link !== '#' ? (
-                                            <a
-                                                href={asset.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-blue-400 hover:text-blue-300 underline"
-                                            >
-                                                Open
-                                            </a>
-                                        ) : (
-                                            <span className="text-gray-500">N/A</span>
-                                        )}
-                                    </td>
-                                </tr>
-                            ))
+                            currentItems.map((asset, index) => {
+                                // Format tags for tooltip
+                                const tagsTooltip = asset.tags?.length > 0 
+                                    ? `Tags: ${asset.tags.join(', ')}`
+                                    : 'No tags';
+                                
+                                return (
+                                    <tr 
+                                        key={index} 
+                                        className="hover:bg-gray-500"
+                                        title={tagsTooltip}
+                                        style={{ cursor: 'help' }}
+                                    >
+                                        <td className={TableCellClasses}>{asset.name}</td>
+                                        <td className={TableCellClasses}>{asset.type}</td>
+                                        <td className={TableCellClasses}>{asset.assetPack}</td>
+                                        <td className={TableCellClasses}>
+                                            {asset.link && asset.link !== '#' ? (
+                                                <a
+                                                    href={asset.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-blue-400 hover:text-blue-300 underline"
+                                                >
+                                                    Open
+                                                </a>
+                                            ) : (
+                                                <span className="text-gray-500">N/A</span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                );
+                            })
                         )}
                     </tbody>
                 </table>

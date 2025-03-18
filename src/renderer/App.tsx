@@ -86,7 +86,9 @@ const App: React.FC = () => {
                 const matchesSearch = searchTerm === '' ||
                     asset.name.toLowerCase().includes(searchLower) ||
                     asset.type.toLowerCase().includes(searchLower) ||
-                    asset.assetPack.toLowerCase().includes(searchLower);
+                    asset.assetPack.toLowerCase().includes(searchLower) ||
+                    // Add tag search functionality
+                    (asset.tags && asset.tags.some(tag => tag.toLowerCase().includes(searchLower)));
 
                 // Check if asset matches any of the selected types (or all if none selected)
                 const matchesType = includeAllTypes ||
