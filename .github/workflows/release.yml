@@ -82,7 +82,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/**/*
+            artifacts/mac-artifacts/*.dmg
+            artifacts/mac-artifacts/*.zip
+            artifacts/win-artifacts/*.exe
           draft: false
           prerelease: false
         env:
