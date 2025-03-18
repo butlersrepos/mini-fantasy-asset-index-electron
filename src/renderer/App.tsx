@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Filters from './components/Filters.jsx';
-import AssetTable from './components/AssetTable.jsx';
-import Settings from './components/Settings.jsx';
+import Filters from './components/Filters';
+import AssetTable from './components/AssetTable';
+import Settings from './components/Settings';
 
 import buildersGif from './assets/builders.gif';
 import { Asset } from '../types.js';
