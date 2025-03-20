@@ -9,6 +9,7 @@ on:
 
 jobs:
   build-mac:
+    environment: app builds env
     runs-on: macos-latest
     
     steps:
@@ -37,6 +38,7 @@ jobs:
           if-no-files-found: warn
   
   build-windows:
+    environment: app builds env
     runs-on: windows-latest
     
     steps:
