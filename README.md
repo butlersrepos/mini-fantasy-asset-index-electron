@@ -1,34 +1,27 @@
 # mini-fantasy-asset-index-electron
 
-An Electron application with React and TypeScript
+An Electron application with React, TypeScript, and Tailwind.
 
-## Recommended IDE Setup
+This app shows the index of assets created for Mini Fantasy, a 8x8 pixel art collection by Krishna Palacio.
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## Dev
+```
+npm i
 
-## Project Setup
-
-### Install
-
-```bash
-$ npm install
+npx electron-vite dev
 ```
 
-### Development
-
-```bash
-$ npm run dev
+## Build
+```
+npm run build:win
+npm run build:mac
 ```
 
-### Build
+## Codesign (Mac)
+Follow [code signing instructions](https://www.electronjs.org/docs/latest/tutorial/code-signing)
 
-```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
+Setup your own Developer and Installer Certificates in your keychain.
+Run this locally to sign & notarize the first time, notarizing can take a bit.
+```
+APPLE_ID=foo APPLE_TEAM_ID=bar APPLE_APP_SPECIFIC_PASSWORD=baz npm run build:mac
 ```
