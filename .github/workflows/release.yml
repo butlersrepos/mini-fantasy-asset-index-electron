@@ -9,8 +9,13 @@ on:
 
 jobs:
   build-mac:
-    environment: app builds env
     runs-on: macos-latest
+    environment: app builds env
+    env:
+      CSC_LINK: ${{ secrets.CSC_LINK }}
+      CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+      CSC_INSTALLER_LINK: ${{ secrets.CSC_INSTALLER_LINK }}
+      CSC_INSTALLER_KEY_PASSWORD: ${{ secrets.CSC_INSTALLER_KEY_PASSWORD }}
     
     steps:
       - name: Checkout repository
